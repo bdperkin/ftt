@@ -24,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-__version__ = "1.0.0"
-__author__ = "User"
+from ._version import __version__, get_version
+
+__author__ = "Brandon Perkins"
 
 from .core import FileTypeTester
 from .types import FileType, TestResult
 
-__all__ = ["FileTypeTester", "FileType", "TestResult"]
+__all__ = ["FileTypeTester", "FileType", "TestResult", "__version__", "get_version"]

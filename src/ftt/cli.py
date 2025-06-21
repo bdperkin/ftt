@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 from typing import List
 
-from . import __version__
+from ._version import get_version
 from .core import FileTypeTester
 
 
@@ -48,7 +48,7 @@ def create_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "--version", action="version", version=f"%(prog)s {__version__}"
+        "--version", action="version", version=f"%(prog)s {get_version()}"
     )
 
     parser.add_argument(

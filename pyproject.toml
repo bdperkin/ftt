@@ -25,7 +25,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ftt"
-version = "1.0.0"
+dynamic = ["version"]
 description = "File Type Tester - A modern Python tool for classifying files"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -47,7 +47,9 @@ classifiers = [
     "Topic :: System :: Filesystems",
     "Topic :: Utilities",
 ]
-dependencies = []
+dependencies = [
+    "importlib-metadata>=1.0; python_version<'3.8'"
+]
 
 [project.optional-dependencies]
 dev = [
@@ -71,6 +73,9 @@ where = ["src"]
 
 [tool.setuptools.package-dir]
 "" = "src"
+
+[tool.setuptools.dynamic]
+version = {attr = "ftt._version.__version__"}
 
 [tool.black]
 line-length = 88
