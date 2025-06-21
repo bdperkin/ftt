@@ -1,0 +1,20 @@
+This is a sample text file for testing the FTT (File Type Tester) tool.
+
+It contains multiple lines of plain ASCII text, with various characters and formatting.
+
+Here are some features that should be detected:
+- Regular sentences with punctuation.
+- Numbers like 123, 456.789, and dates like 2024-01-01.
+- Special characters: !@#$%^&*()_+{}|:"<>?[]
+- Unicode characters: café, naïve, résumé
+
+The file should be classified as "text" by the FTT tool because it contains
+only printable characters and common control characters (like newlines and tabs).
+
+This is exactly the type of file that users expect to have the word "text"
+printed, as mentioned in the requirements.
+
+	This line starts with a tab character.
+  This line has leading spaces.
+
+End of sample text file. 

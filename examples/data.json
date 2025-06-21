@@ -1,0 +1,19 @@
+{
+    "name": "ftt",
+    "version": "1.0.0",
+    "description": "File Type Tester - A modern Python tool for classifying files",
+    "author": "User",
+    "license": "MIT",
+    "keywords": ["file", "type", "classification", "magic", "detection"],
+    "dependencies": {},
+    "dev_dependencies": {
+        "pytest": ">=7.0",
+        "black": ">=23.0",
+        "mypy": ">=1.0"
+    },
+    "supported_formats": [
+        "executable",
+        "text",
+        "data"
+    ]
+} 
