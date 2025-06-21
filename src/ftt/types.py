@@ -9,6 +9,7 @@ from typing import Optional
 
 class FileTypeCategory(Enum):
     """Primary file type categories."""
+
     TEXT = "text"
     EXECUTABLE = "executable"
     DATA = "data"
@@ -17,6 +18,7 @@ class FileTypeCategory(Enum):
 @dataclass
 class FileType:
     """Represents a detected file type."""
+
     category: FileTypeCategory
     description: str
     mime_type: Optional[str] = None
@@ -32,6 +34,7 @@ class FileType:
 @dataclass
 class TestResult:
     """Result of a file type test."""
+
     success: bool
     file_type: Optional[FileType] = None
     error: Optional[str] = None
@@ -44,4 +47,4 @@ class TestResult:
     @classmethod
     def failure_result(cls, error: str) -> "TestResult":
         """Create a failed test result."""
-        return cls(success=False, error=error) 
+        return cls(success=False, error=error)

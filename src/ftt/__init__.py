@@ -10,4 +10,4 @@ __author__ = "User"
 from .core import FileTypeTester
 from .types import FileType, TestResult
 
-__all__ = ["FileTypeTester", "FileType", "TestResult"] 
+__all__ = ["FileTypeTester", "FileType", "TestResult"]

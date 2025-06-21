@@ -17,4 +17,4 @@ printed, as mentioned in the requirements.
 	This line starts with a tab character.
   This line has leading spaces.
 
-End of sample text file. 
+End of sample text file.

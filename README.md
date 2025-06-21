@@ -79,4 +79,4 @@ flake8 src/
 
 ## License
 
-MIT License - see LICENSE file for details. 
+MIT License - see LICENSE file for details.
