@@ -98,6 +98,12 @@ python scripts/test.py clean        # Clean test artifacts
 python scripts/format.py        # Apply formatting
 python scripts/format.py check  # Check formatting only
 
+# Black code formatter utilities
+python scripts/black_demo.py info      # Show black version and config
+python scripts/black_demo.py check     # Check formatting
+python scripts/black_demo.py format    # Apply formatting
+python scripts/black_demo.py diff      # Show formatting differences
+
 # Individual tools
 isort src/ tests/ scripts/       # Sort imports
 black src/ tests/ scripts/       # Format code
@@ -128,6 +134,22 @@ FTT uses isort to maintain consistent import ordering:
 - **Black-compatible** configuration for seamless integration
 
 Import sections are automatically sorted alphabetically within each group.
+
+### Code Formatting
+
+FTT uses Black for consistent Python code formatting:
+
+- **Line length**: 88 characters (PEP 8 compliant)
+- **Target version**: Python 3.8+ compatibility
+- **File types**: Python source (.py) and stub (.pyi) files
+- **Preview mode**: Disabled for stable formatting
+- **Exclusions**: Build directories, .venv, .git, and other artifacts
+
+Black automatically handles:
+- String quote normalization
+- Trailing comma insertion
+- Line length optimization
+- Consistent indentation and spacing
 
 ## License
 
