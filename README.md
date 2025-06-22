@@ -246,6 +246,36 @@ Security reports are generated as:
 - **bandit-report.html**: Human-readable format for review
 - **bandit-baseline.json**: Baseline for tracking new issues
 
+### Pre-commit Hooks
+
+FTT uses pre-commit hooks to automatically enforce code quality standards:
+
+```bash
+# Install pre-commit hooks (run once after cloning)
+pre-commit install
+
+# Run all hooks manually
+pre-commit run --all-files
+
+# Run specific hook
+pre-commit run black
+pre-commit run pytest-check
+```
+
+**Configured hooks:**
+
+- **File hygiene**: trailing whitespace, end-of-file fixing, YAML/JSON/TOML validation
+- **Python quality**: isort (import sorting), black (formatting), flake8 (linting), mypy (type checking)
+- **Security**: bandit (vulnerability scanning)
+- **Testing**: pytest (unit tests), pytest-cov (coverage testing)
+
+**Hook stages:**
+
+- **pre-commit**: Runs on every commit (includes all quality checks + pytest)
+- **pre-push**: Runs on push (includes pytest with coverage requirements)
+
+The hooks automatically format code, catch issues early, and ensure consistent quality across all commits.
+
 ## License
 
 MIT License - see LICENSE file for details.

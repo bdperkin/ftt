@@ -70,3 +70,23 @@ repos:
       - id: bandit
         args: ["-r", "src/"]
         exclude: tests/
+
+  # Testing
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: ["--tb=short"]
+        stages: [pre-commit]
+      - id: pytest-cov
+        name: pytest with coverage
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: ["--cov=src/ftt", "--cov-report=term-missing", "--cov-fail-under=50", "--tb=short"]
+        stages: [pre-push]
