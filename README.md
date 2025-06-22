@@ -63,10 +63,37 @@ document.pdf: PDF document data
 
 ## Development
 
+### Running Tests
+
+FTT uses pytest for testing with coverage reporting:
+
 ```bash
-# Run tests
+# Run all tests with coverage
 pytest
 
+# Run tests without coverage (faster)
+pytest --no-cov
+
+# Run with verbose output
+pytest -v
+
+# Run specific test
+pytest -k test_python_script
+
+# Generate HTML coverage report
+pytest --cov-report=html
+
+# Using the test runner script
+python scripts/test.py all          # All tests with coverage
+python scripts/test.py fast         # Tests without coverage
+python scripts/test.py html         # Generate HTML coverage report
+python scripts/test.py specific test_name  # Run specific test
+python scripts/test.py clean        # Clean test artifacts
+```
+
+### Code Quality
+
+```bash
 # Format code
 black src/
 
@@ -75,7 +102,20 @@ mypy src/
 
 # Linting
 flake8 src/
+
+# Run pre-commit hooks
+pre-commit run --all-files
 ```
+
+### Test Coverage
+
+Current test coverage focuses on core functionality:
+- File type detection (filesystem, magic, language tests)
+- Multiple file processing
+- Error handling
+- Result formatting
+
+Coverage reports are generated in `htmlcov/index.html` and can be viewed in a web browser.
 
 ## License
 
