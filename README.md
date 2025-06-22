@@ -162,6 +162,7 @@ Black automatically handles:
 
 FTT uses Flake8 for comprehensive Python code linting:
 
+- **Configuration**: Centralized in `pyproject.toml` (via flake8-pyproject plugin)
 - **Line length**: 88 characters (compatible with Black)
 - **Ignored codes**: E203, E501, W503, W504 (conflicts with Black)
 - **Complexity**: McCabe complexity threshold of 15

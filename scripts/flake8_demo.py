@@ -55,13 +55,14 @@ def show_flake8_info() -> None:
         print(f"Version: {result.stdout.strip()}")
 
     # Show configuration
-    print("\nConfiguration (from .flake8):")
+    print("\nConfiguration (from pyproject.toml):")
     print("- Max line length: 88 characters (black compatible)")
     print("- Ignored codes: E203, E501, W503, W504 (black conflicts)")
     print("- Max complexity: 15 (McCabe complexity)")
     print("- Docstring convention: Google style")
     print("- Exclude: build dirs, .venv, .git, etc.")
     print("- Per-file ignores: __init__.py imports, test assertions")
+    print("- Requires: flake8-pyproject plugin for pyproject.toml support")
     print()
 
 
