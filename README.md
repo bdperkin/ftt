@@ -132,12 +132,35 @@ python scripts/bandit_demo.py html     # Generate HTML security report
 python scripts/bandit_demo.py baseline # Generate security baseline
 python scripts/bandit_demo.py tests    # Show available security tests
 
+# Tox testing utilities
+python scripts/tox_demo.py list        # List all tox environments
+python scripts/tox_demo.py test        # Run basic tests
+python scripts/tox_demo.py lint        # Run linting checks
+python scripts/tox_demo.py type        # Run type checking
+python scripts/tox_demo.py security    # Run security checks
+python scripts/tox_demo.py coverage    # Run coverage analysis
+python scripts/tox_demo.py all         # Run all quality checks
+python scripts/tox_demo.py clean       # Clean build artifacts
+python scripts/tox_demo.py format      # Format code
+python scripts/tox_demo.py parallel    # Run tests in parallel
+
 # Individual tools
 isort src/ tests/ scripts/       # Sort imports
 black src/ tests/ scripts/       # Format code
 flake8 src/ tests/ scripts/      # Lint code
 mypy src/ tests/ scripts/        # Type checking
 bandit -r -s B101 src/ scripts/  # Security scanning (excludes tests)
+
+# Tox commands
+tox                              # Run default environments
+tox -e py38,py39,py310          # Run specific Python versions
+tox -e lint                     # Run linting only
+tox -e type                     # Run type checking only
+tox -e security                 # Run security scanning only
+tox -e coverage                 # Run with coverage
+tox -e all                      # Run all quality checks
+tox -p auto                     # Run in parallel
+tox -r                          # Recreate environments
 
 # Run pre-commit hooks
 pre-commit run --all-files
@@ -245,6 +268,86 @@ Security reports are generated as:
 - **bandit-report.json**: Machine-readable format for CI/CD
 - **bandit-report.html**: Human-readable format for review
 - **bandit-baseline.json**: Baseline for tracking new issues
+
+### Multi-Environment Testing with Tox
+
+FTT uses Tox for comprehensive testing across multiple Python versions and environments:
+
+- **Python versions**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
+- **Quality environments**: lint, type, security, coverage
+- **Utility environments**: format, clean, build, dev
+- **Parallel execution**: Run tests across multiple versions simultaneously
+- **Isolated builds**: Each environment uses isolated package builds
+
+**Key Tox environments:**
+
+```bash
+# Testing environments
+tox -e py38                 # Test on Python 3.8
+tox -e py39                 # Test on Python 3.9
+tox -e py310                # Test on Python 3.10
+tox -e py311                # Test on Python 3.11
+tox -e py312                # Test on Python 3.12
+tox -e py313                # Test on Python 3.13
+
+# Quality assurance environments
+tox -e lint                 # Run all linting tools (black, isort, flake8)
+tox -e type                 # Run type checking with mypy
+tox -e security             # Run security scanning with bandit
+tox -e coverage             # Run tests with full coverage reporting
+
+# Utility environments
+tox -e format               # Format code with black and isort
+tox -e clean                # Clean build artifacts and cache files
+tox -e build                # Build and validate package
+tox -e dev                  # Set up development environment
+tox -e all                  # Run all quality checks in sequence
+
+# Convenience environments
+tox -e quick                # Quick test run without coverage
+tox -e verbose              # Verbose test run with detailed output
+```
+
+**Common Tox workflows:**
+
+```bash
+# Run all default environments (Python versions + quality)
+tox
+
+# Run tests in parallel across all Python versions
+tox -p auto
+
+# Run specific environments in parallel
+tox -p auto -e py38,py39,py310,lint,type
+
+# Run tests with specific pytest arguments
+tox -e py39 -- --verbose --tb=short
+
+# Recreate environments (useful after dependency changes)
+tox -r
+
+# List all available environments
+tox list
+
+# Run comprehensive quality checks
+tox -e all
+
+# Development workflow
+tox -e format               # Format code
+tox -e lint                 # Check formatting and linting
+tox -e type                 # Check types
+tox -e py311                # Test on your development Python version
+```
+
+**Tox configuration highlights:**
+
+- **Isolated builds**: Each environment builds the package independently
+- **Dependency management**: Each environment specifies its own dependencies
+- **Skip missing interpreters**: Tests continue even if some Python versions are missing
+- **Wheel packaging**: Uses modern wheel-based package installation
+- **Coverage integration**: Coverage reports generated in htmlcov/ and coverage.xml
+- **Security reports**: Bandit generates JSON and console reports
+- **Cleanup utilities**: Comprehensive artifact cleaning across all cache directories
 
 ### Pre-commit Hooks
 

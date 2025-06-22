@@ -198,3 +198,6 @@ cython_debug/
 bandit-report.json
 bandit-report.html
 bandit-baseline.json
+
+# Tox additional artifacts
+.tox-report/
