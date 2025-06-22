@@ -23,8 +23,9 @@ SOFTWARE.
 """
 
 import struct
-from pathlib import Path
 from typing import List, Optional, Tuple
+
+from pathlib import Path
 
 from ..types import FileType, FileTypeCategory, TestResult
 

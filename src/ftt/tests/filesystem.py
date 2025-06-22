@@ -24,6 +24,7 @@ SOFTWARE.
 
 import os
 import stat
+
 from pathlib import Path
 
 from ..types import FileType, FileTypeCategory, TestResult

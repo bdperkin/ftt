@@ -29,8 +29,9 @@ SOFTWARE.
 import os
 import subprocess  # nosec
 import sys
-from pathlib import Path
 from typing import List
+
+from pathlib import Path
 
 
 def run_command(cmd: List[str]) -> int:

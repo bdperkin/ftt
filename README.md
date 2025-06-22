@@ -94,14 +94,15 @@ python scripts/test.py clean        # Clean test artifacts
 ### Code Quality
 
 ```bash
-# Format code
-black src/
+# Format code and sort imports
+python scripts/format.py        # Apply formatting
+python scripts/format.py check  # Check formatting only
 
-# Type checking
-mypy src/
-
-# Linting
-flake8 src/
+# Individual tools
+isort src/ tests/ scripts/       # Sort imports
+black src/ tests/ scripts/       # Format code
+mypy src/                        # Type checking
+flake8 src/                      # Linting
 
 # Run pre-commit hooks
 pre-commit run --all-files
@@ -116,6 +117,17 @@ Current test coverage focuses on core functionality:
 - Result formatting
 
 Coverage reports are generated in `htmlcov/index.html` and can be viewed in a web browser.
+
+### Import Sorting
+
+FTT uses isort to maintain consistent import ordering:
+
+- **Standard library imports** first
+- **Third-party imports** second (separated by blank line)
+- **First-party imports** last (separated by blank line)
+- **Black-compatible** configuration for seamless integration
+
+Import sections are automatically sorted alphabetically within each group.
 
 ## License
 

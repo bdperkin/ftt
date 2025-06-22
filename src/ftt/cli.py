@@ -24,8 +24,9 @@ SOFTWARE.
 
 import argparse
 import sys
-from pathlib import Path
 from typing import List
+
+from pathlib import Path
 
 from ._version import get_version
 from .core import FileTypeTester

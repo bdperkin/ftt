@@ -22,8 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from pathlib import Path
 from typing import List, Optional, Union
+
+from pathlib import Path
 
 from .tests import test_filesystem, test_language, test_magic
 from .types import FileType, FileTypeCategory, TestResult

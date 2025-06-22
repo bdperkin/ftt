@@ -23,6 +23,7 @@ SOFTWARE.
 """
 
 import tempfile
+
 from pathlib import Path
 
 from ftt import FileTypeTester

@@ -23,8 +23,9 @@ SOFTWARE.
 """
 
 import re
-from pathlib import Path
 from typing import Dict, List, Pattern, Tuple
+
+from pathlib import Path
 
 from ..types import FileType, FileTypeCategory, TestResult
 
