@@ -347,6 +347,139 @@ tox -e py311                # Test on your development Python version
 - **Wheel packaging**: Uses modern wheel-based package installation
 - **Coverage integration**: Coverage reports generated in htmlcov/ and coverage.xml
 - **Security reports**: Bandit generates JSON and console reports
+
+### Ultra-Fast Development with UV
+
+FTT supports UV, the next-generation Python package manager written in Rust that's 10-100x faster than pip:
+
+- **Lightning-fast installs**: Parallel downloads and efficient caching
+- **Universal lockfiles**: Cross-platform reproducible builds with `uv.lock`
+- **Python version management**: Install and manage Python versions automatically
+- **Project management**: Modern pyproject.toml-based workflow
+- **Tool execution**: Run tools in isolated environments with `uvx`
+- **Workspace support**: Manage multiple related packages
+
+**UV Installation:**
+
+```bash
+# Install UV (one-time setup)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Or with pip
+pip install uv
+
+# Verify installation
+uv --version
+```
+
+**UV Workflow:**
+
+```bash
+# Project setup and dependency management
+uv sync --dev                           # Install all dependencies (creates .venv)
+uv add package_name                     # Add runtime dependency
+uv add --dev package_name               # Add development dependency
+uv remove package_name                  # Remove dependency
+uv lock                                 # Update lock file
+uv tree                                 # Show dependency tree
+
+# Running commands in project environment
+uv run pytest                          # Run tests
+uv run black src tests scripts         # Format code
+uv run flake8 src tests scripts        # Lint code
+uv run mypy src tests scripts          # Type checking
+uv run bandit -r src scripts           # Security scanning
+
+# Python version management
+uv python list                         # List available Python versions
+uv python install 3.11                 # Install Python 3.11
+uv python pin 3.11                     # Pin project to Python 3.11
+
+# Tool execution (no installation needed)
+uvx black .                            # Run black in temporary environment
+uvx ruff check .                       # Run ruff linter
+uvx mypy src/                          # Run mypy type checker
+
+# Building and publishing
+uv build                               # Build wheel and sdist
+uv publish                             # Publish to PyPI (with credentials)
+
+# Exporting for compatibility
+uv export --format requirements-txt --output-file requirements.txt
+uv export --dev --format requirements-txt --output-file requirements-dev.txt
+```
+
+**UV Performance Benefits:**
+
+```bash
+# UV Demo Script - Interactive exploration
+python scripts/uv_demo.py              # Interactive menu
+python scripts/uv_demo.py --info       # Show UV information
+python scripts/uv_demo.py --benchmark  # Performance comparison
+
+# UV utilities
+python scripts/uv_demo.py list         # List UV environments
+python scripts/uv_demo.py sync         # Sync dependencies
+python scripts/uv_demo.py test         # Run tests with UV
+python scripts/uv_demo.py lint         # Run linting with UV
+python scripts/uv_demo.py build        # Build with UV
+python scripts/uv_demo.py clean        # Clean UV cache
+```
+
+**UV vs Traditional Tools:**
+
+| Traditional | UV Equivalent | Speed Improvement |
+|-------------|---------------|-------------------|
+| `pip install package` | `uv add package` | 10-100x faster |
+| `pip install -r requirements.txt` | `uv sync` | 10-50x faster |
+| `python -m venv .venv` | `uv venv` | 10x faster |
+| `pip freeze > requirements.txt` | `uv export` | Instant |
+| `pyenv install 3.11` | `uv python install 3.11` | 5x faster |
+| `pipx run tool` | `uvx tool` | 5-10x faster |
+
+**UV Configuration:**
+
+The project includes UV configuration in `pyproject.toml`:
+
+```toml
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    # ... other dev tools
+]
+
+[tool.uv.workspace]
+members = ["."]
+```
+
+**UV Lock File:**
+
+The `uv.lock` file ensures reproducible builds:
+- **Cross-platform**: Works on Linux, macOS, Windows
+- **Version-specific**: Locks exact versions of all dependencies
+- **Transitive dependencies**: Includes all indirect dependencies
+- **Integrity checks**: SHA256 hashes for security
+- **Kept in version control**: Ensures consistent environments
+
+**UV Cache Management:**
+
+```bash
+uv cache dir                           # Show cache directory
+uv cache clean                         # Clean all cache
+uv cache prune                         # Remove unused cache entries
+```
+
+**UV Development Workflow:**
+
+1. **Setup**: `uv sync --dev` (one-time, creates .venv)
+2. **Development**: `uv run command` (runs in project environment)
+3. **Testing**: `uv run pytest` (fast test execution)
+4. **Quality**: `uv run black .` (instant formatting)
+5. **Build**: `uv build` (fast wheel creation)
+
+UV makes Python development faster, more reliable, and more enjoyable!
 - **Cleanup utilities**: Comprehensive artifact cleaning across all cache directories
 
 ### Pre-commit Hooks
