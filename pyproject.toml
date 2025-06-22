@@ -65,6 +65,7 @@ dev = [
     "bandit>=1.7",
     "pre-commit>=3.0",
     "tox>=4.0",
+    "tox-uv>=1.26.0; python_version>='3.9'",
 ]
 
 [project.scripts]
@@ -90,6 +91,7 @@ dev-dependencies = [
     "bandit>=1.7",
     "pre-commit>=3.0",
     "tox>=4.0",
+    "tox-uv>=1.26.0; python_version>='3.9'",
     "build>=0.10",
     "twine>=4.0",
     "types-setuptools",
