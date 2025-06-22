@@ -94,9 +94,9 @@ python scripts/test.py clean        # Clean test artifacts
 ### Code Quality
 
 ```bash
-# Format code and sort imports (includes flake8 linting)
-python scripts/format.py        # Apply formatting + lint check
-python scripts/format.py check  # Check formatting + linting
+# Format code and sort imports (includes flake8 linting + mypy type checking)
+python scripts/format.py        # Apply formatting + lint + type check
+python scripts/format.py check  # Check formatting + linting + types
 
 # Black code formatter utilities
 python scripts/black_demo.py info      # Show black version and config
@@ -111,11 +111,20 @@ python scripts/flake8_demo.py stats       # Show error statistics
 python scripts/flake8_demo.py complexity  # Check code complexity only
 python scripts/flake8_demo.py ignored     # Show ignored errors
 
+# MyPy type checking utilities
+python scripts/mypy_demo.py info       # Show mypy version and config
+python scripts/mypy_demo.py check      # Run standard type checking
+python scripts/mypy_demo.py strict     # Run strict type checking
+python scripts/mypy_demo.py coverage   # Generate HTML coverage report
+python scripts/mypy_demo.py errors     # Show detailed error information
+python scripts/mypy_demo.py daemon     # Start mypy daemon
+python scripts/mypy_demo.py fast       # Run with daemon (faster)
+
 # Individual tools
 isort src/ tests/ scripts/       # Sort imports
 black src/ tests/ scripts/       # Format code
 flake8 src/ tests/ scripts/      # Lint code
-mypy src/                        # Type checking
+mypy src/ tests/ scripts/        # Type checking
 
 # Run pre-commit hooks
 pre-commit run --all-files
@@ -175,6 +184,26 @@ Flake8 checks for:
 - Code complexity (McCabe)
 - Docstring presence and format
 - Security issues (with bandit integration)
+
+### Static Type Checking
+
+FTT uses MyPy for comprehensive static type analysis:
+
+- **Configuration**: Centralized in `pyproject.toml` with strict mode enabled
+- **Python version**: 3.8+ compatibility with modern type hints
+- **Strict mode**: Comprehensive type checking with all warnings enabled
+- **Files**: src/, tests/, scripts/ with namespace package support
+- **Error output**: Detailed with codes, columns, context, and pretty formatting
+- **HTML reports**: Type coverage reports generated in `mypy-report/`
+- **Daemon mode**: Fast incremental checking for development
+
+MyPy checks for:
+- Type annotation completeness and correctness
+- Function signature compatibility
+- Variable type consistency
+- Generic type usage and bounds
+- Import resolution and module structure
+- Unreachable code and logical errors
 
 ## License
 

@@ -48,10 +48,10 @@ def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help"]:
         print("Usage: python scripts/format.py [check]")
         print()
-        print("Format Python code using isort, black, and flake8.")
+        print("Format Python code using isort, black, flake8, and mypy.")
         print()
         print("Options:")
-        print("  check    Check formatting and linting without making changes")
+        print("  check    Check formatting, linting, and types without making changes")
         print("  -h, --help    Show this help message")
         return 0
 
@@ -59,7 +59,7 @@ def main() -> int:
     paths = ["src", "tests", "scripts"]
 
     if check_only:
-        print("🔍 Checking code formatting and linting...")
+        print("🔍 Checking code formatting, linting, and types...")
         print()
 
         # Check import sorting
@@ -75,8 +75,11 @@ def main() -> int:
         # Check linting
         flake8_exit = run_command(["flake8"] + paths, "code linting check")
 
-        if isort_exit == 0 and black_exit == 0 and flake8_exit == 0:
-            print("✅ All code is properly formatted and linted!")
+        # Check types
+        mypy_exit = run_command(["mypy"] + paths, "static type checking")
+
+        if isort_exit == 0 and black_exit == 0 and flake8_exit == 0 and mypy_exit == 0:
+            print("✅ All code is properly formatted, linted, and type-checked!")
             return 0
         else:
             print("❌ Code quality issues found. Run without 'check' to fix formatting.")
@@ -96,10 +99,16 @@ def main() -> int:
         print("🔍 Running linting check...")
         flake8_exit = run_command(["flake8"] + paths, "code linting")
 
+        # Check types (informational only, doesn't fix issues)
+        print("🔍 Running type check...")
+        mypy_exit = run_command(["mypy"] + paths, "static type checking")
+
         if isort_exit == 0 and black_exit == 0:
             print("✅ Code formatting completed successfully!")
             if flake8_exit != 0:
                 print("⚠️  Some linting issues found (see above)")
+            if mypy_exit != 0:
+                print("⚠️  Some type checking issues found (see above)")
             return 0
         else:
             print("❌ Some formatting operations failed.")
