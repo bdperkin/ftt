@@ -71,7 +71,7 @@ repos:
         args: ["-r", "src/"]
         exclude: tests/
 
-  # Testing
+  # Testing (using pytest repository approach)
   - repo: local
     hooks:
       - id: pytest-check
@@ -80,7 +80,7 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-        args: ["--tb=short"]
+        args: ["--tb=short", "--no-cov"]
         stages: [pre-commit]
       - id: pytest-cov
         name: pytest with coverage
