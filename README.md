@@ -94,9 +94,9 @@ python scripts/test.py clean        # Clean test artifacts
 ### Code Quality
 
 ```bash
-# Format code and sort imports (includes flake8 linting + mypy type checking)
-python scripts/format.py        # Apply formatting + lint + type check
-python scripts/format.py check  # Check formatting + linting + types
+# Format code and sort imports (includes flake8 linting + mypy type checking + bandit security)
+python scripts/format.py        # Apply formatting + lint + type check + security scan
+python scripts/format.py check  # Check formatting + linting + types + security
 
 # Black code formatter utilities
 python scripts/black_demo.py info      # Show black version and config
@@ -120,11 +120,24 @@ python scripts/mypy_demo.py errors     # Show detailed error information
 python scripts/mypy_demo.py daemon     # Start mypy daemon
 python scripts/mypy_demo.py fast       # Run with daemon (faster)
 
+# Bandit security scanning utilities
+python scripts/bandit_demo.py info     # Show bandit version and config
+python scripts/bandit_demo.py scan     # Run standard security scan
+python scripts/bandit_demo.py high     # Scan with HIGH confidence level
+python scripts/bandit_demo.py medium   # Scan with MEDIUM confidence level
+python scripts/bandit_demo.py low      # Scan with LOW confidence level
+python scripts/bandit_demo.py severe   # Scan with HIGH severity level
+python scripts/bandit_demo.py json     # Generate JSON security report
+python scripts/bandit_demo.py html     # Generate HTML security report
+python scripts/bandit_demo.py baseline # Generate security baseline
+python scripts/bandit_demo.py tests    # Show available security tests
+
 # Individual tools
 isort src/ tests/ scripts/       # Sort imports
 black src/ tests/ scripts/       # Format code
 flake8 src/ tests/ scripts/      # Lint code
 mypy src/ tests/ scripts/        # Type checking
+bandit -r -s B101 src/ scripts/  # Security scanning (excludes tests)
 
 # Run pre-commit hooks
 pre-commit run --all-files
@@ -204,6 +217,34 @@ MyPy checks for:
 - Generic type usage and bounds
 - Import resolution and module structure
 - Unreachable code and logical errors
+
+### Security Scanning
+
+FTT uses Bandit for comprehensive security vulnerability scanning:
+
+- **Configuration**: Centralized in `pyproject.toml` with MEDIUM confidence/severity
+- **Target directories**: src/, scripts/ with recursive scanning (excludes tests/)
+- **Confidence levels**: LOW, MEDIUM, HIGH (filters noise vs thoroughness)
+- **Severity levels**: LOW, MEDIUM, HIGH (focuses on important issues)
+- **Output formats**: screen (human-readable), JSON, HTML, XML, CSV
+- **Context lines**: 3 lines of code context for each issue
+- **Exclusions**: Build directories, .venv, .git, and cache folders
+- **Report generation**: JSON and HTML reports for CI/CD integration
+
+Bandit checks for:
+- Hardcoded passwords and secrets
+- SQL injection vulnerabilities
+- Shell injection risks
+- Insecure random number generation
+- Unsafe file operations and permissions
+- Cryptographic weaknesses
+- Network security issues
+- Input validation problems
+
+Security reports are generated as:
+- **bandit-report.json**: Machine-readable format for CI/CD
+- **bandit-report.html**: Human-readable format for review
+- **bandit-baseline.json**: Baseline for tracking new issues
 
 ## License
 

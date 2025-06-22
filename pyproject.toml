@@ -62,6 +62,7 @@ dev = [
     "mypy>=1.0",
     "lxml>=4.0",
     "isort>=5.0",
+    "bandit>=1.7",
 ]
 
 [project.scripts]
@@ -251,3 +252,44 @@ exclude_lines = [
 ]
 show_missing = true
 skip_covered = false
+
+[tool.bandit]
+# Bandit security scanner configuration
+# Note: Some options like per-file skips work better via command-line flags
+
+# Target directories for security scanning (src only for production code)
+targets = ["src", "scripts"]
+
+# Confidence levels: LOW, MEDIUM, HIGH
+confidence = "MEDIUM"
+
+# Severity levels: LOW, MEDIUM, HIGH
+severity = "MEDIUM"
+
+# Output format: json, txt, html, xml, csv, screen, yaml
+format = "screen"
+
+# Exclude directories
+exclude_dirs = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    "build",
+    "dist",
+    "htmlcov",
+    "*.egg-info",
+    "tests",  # Exclude test directory entirely
+]
+
+# Skip specific test IDs globally
+skips = [
+    "B101",  # assert_used - Allow asserts (mainly for scripts/demos)
+    "B603",  # subprocess_without_shell_equals_true - We explicitly use shell=False
+]
+
+# Additional bandit configuration
+recursive = true
+aggregate = "file"
+number_of_lines_of_context = 3

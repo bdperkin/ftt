@@ -193,3 +193,8 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Bandit security scanner
+bandit-report.json
+bandit-report.html
+bandit-baseline.json
