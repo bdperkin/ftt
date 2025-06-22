@@ -94,9 +94,9 @@ python scripts/test.py clean        # Clean test artifacts
 ### Code Quality
 
 ```bash
-# Format code and sort imports
-python scripts/format.py        # Apply formatting
-python scripts/format.py check  # Check formatting only
+# Format code and sort imports (includes flake8 linting)
+python scripts/format.py        # Apply formatting + lint check
+python scripts/format.py check  # Check formatting + linting
 
 # Black code formatter utilities
 python scripts/black_demo.py info      # Show black version and config
@@ -104,11 +104,18 @@ python scripts/black_demo.py check     # Check formatting
 python scripts/black_demo.py format    # Apply formatting
 python scripts/black_demo.py diff      # Show formatting differences
 
+# Flake8 linting utilities
+python scripts/flake8_demo.py info        # Show flake8 version and config
+python scripts/flake8_demo.py lint        # Run standard linting
+python scripts/flake8_demo.py stats       # Show error statistics
+python scripts/flake8_demo.py complexity  # Check code complexity only
+python scripts/flake8_demo.py ignored     # Show ignored errors
+
 # Individual tools
 isort src/ tests/ scripts/       # Sort imports
 black src/ tests/ scripts/       # Format code
+flake8 src/ tests/ scripts/      # Lint code
 mypy src/                        # Type checking
-flake8 src/                      # Linting
 
 # Run pre-commit hooks
 pre-commit run --all-files
@@ -150,6 +157,23 @@ Black automatically handles:
 - Trailing comma insertion
 - Line length optimization
 - Consistent indentation and spacing
+
+### Code Linting
+
+FTT uses Flake8 for comprehensive Python code linting:
+
+- **Line length**: 88 characters (compatible with Black)
+- **Ignored codes**: E203, E501, W503, W504 (conflicts with Black)
+- **Complexity**: McCabe complexity threshold of 15
+- **Docstring style**: Google convention
+- **Exclusions**: Build directories, .venv, .git, and cache folders
+
+Flake8 checks for:
+- PEP 8 style violations
+- Logical errors and unused imports
+- Code complexity (McCabe)
+- Docstring presence and format
+- Security issues (with bandit integration)
 
 ## License
 
