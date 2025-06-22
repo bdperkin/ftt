@@ -637,6 +637,92 @@ uv cache prune                         # Remove unused cache entries
 UV makes Python development faster, more reliable, and more enjoyable!
 - **Cleanup utilities**: Comprehensive artifact cleaning across all cache directories
 
+### Lightning-Fast Pre-commit with Pre-commit-UV
+
+FTT integrates **pre-commit-uv**, which accelerates pre-commit hooks by using UV for creating hook environments and installing dependencies. This provides dramatically faster pre-commit execution while maintaining full compatibility.
+
+**What is Pre-commit-UV?**
+
+Pre-commit-UV is a plugin that patches pre-commit to use UV instead of pip/virtualenv for Python-based hooks, providing:
+
+- **10-100x faster** hook environment creation
+- **Lightning-fast** dependency installation for Python hooks
+- **Full compatibility** with existing pre-commit configurations
+- **Reduced CI/CD** pre-commit execution times
+- **Better developer experience** with faster hook feedback
+
+**Installation and Setup:**
+
+```bash
+# Install pre-commit-uv (included in dev dependencies)
+uv sync --dev                  # Installs pre-commit-uv automatically
+
+# Or install manually (requires Python 3.9+)
+uv add --dev pre-commit-uv
+
+# Verify pre-commit-uv is available
+pre-commit --version          # Should show pre-commit-uv in version info
+
+# Note: pre-commit-uv requires Python 3.9+
+# On Python 3.8, hooks will use standard pre-commit behavior
+```
+
+**UV-Enhanced Hooks:**
+
+FTT includes UV-specific hooks for dependency management:
+
+```bash
+# UV-Specific Hooks (Recommended - Much Faster!)
+pre-commit run uv-lock --all-files        # Update uv.lock when pyproject.toml changes
+pre-commit run uv-export --all-files      # Export uv.lock to requirements.txt
+
+# Standard Hooks (UV Accelerated)
+pre-commit run --all-files                # All hooks with UV acceleration
+pre-commit run black --all-files          # Code formatting with UV speed
+pre-commit run isort --all-files          # Import sorting with UV speed
+pre-commit run flake8 --all-files         # Linting with UV speed
+pre-commit run mypy --all-files           # Type checking with UV speed
+```
+
+**Performance Benefits:**
+
+- **Hook Environment Creation**: 10-100x faster virtual environment setup
+- **Dependency Installation**: Lightning-fast package installation with UV
+- **CI/CD Optimization**: Dramatically reduced pre-commit execution times
+- **Developer Experience**: Faster hook iterations and immediate feedback
+
+**Pre-commit-UV Configuration:**
+
+The project includes UV-specific hooks in `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  # UV-specific hooks for dependency management
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.13
+    hooks:
+      # Keep uv.lock in sync with pyproject.toml
+      - id: uv-lock
+      # Export uv.lock to requirements.txt for pip compatibility
+      - id: uv-export
+```
+
+**Demo and Testing:**
+
+```bash
+# Interactive pre-commit-uv demo
+python scripts/precommit_uv_demo.py
+
+# Performance benchmark
+python scripts/precommit_uv_demo.py --benchmark
+
+# Show UV hooks information
+python scripts/precommit_uv_demo.py --hooks
+
+# Compare hook execution
+python scripts/precommit_uv_demo.py --compare
+```
+
 ### Pre-commit Hooks
 
 FTT uses pre-commit hooks to automatically enforce code quality standards:

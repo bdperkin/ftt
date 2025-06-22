@@ -56,6 +56,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Cross-platform support** on Linux, macOS, and Windows
 - **Seamless integration** with existing development workflows
 
+#### Pre-commit-UV Integration
+- **Pre-commit-UV plugin integration** accelerating pre-commit hooks with UV
+- **UV-accelerated hook environments** for 10-100x faster environment creation
+- **UV-specific hooks** for dependency management (uv-lock, uv-export)
+- **Lightning-fast dependency installation** for Python-based hooks
+- **Full compatibility** with existing pre-commit configurations
+- **Reduced CI/CD execution times** for pre-commit checks
+- **Interactive demo script** (scripts/precommit_uv_demo.py) with performance benchmarking
+- **Automatic UV detection** and acceleration for all Python hooks
+- **Requirements.txt export** for pip compatibility via uv-export hook
+
+#### Pre-commit-UV Features
+- **10-100x faster** hook environment creation compared to standard pre-commit
+- **Lightning-fast dependency installation** using UV's parallel downloads
+- **Drop-in replacement** for standard pre-commit with full compatibility
+- **Reduced memory usage** and better error messages
+- **Efficient caching** mechanisms for hook environments
+- **Cross-platform support** on Linux, macOS, and Windows
+- **Seamless integration** with existing pre-commit workflows
+- **Better developer experience** with faster hook feedback loops
+
 ## [1.0.0] - 2025-06-21
 
 ### Added

@@ -20,6 +20,23 @@
 # SOFTWARE.
 
 repos:
+  # UV-specific hooks for dependency management
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.13
+    hooks:
+      # Keep uv.lock in sync with pyproject.toml
+      - id: uv-lock
+        name: uv-lock
+        description: Update uv.lock when pyproject.toml changes
+        files: ^(pyproject\.toml|uv\.lock)$
+
+      # Export uv.lock to requirements.txt for pip compatibility
+      - id: uv-export
+        name: uv-export
+        description: Export uv.lock to requirements.txt
+        args: ["--frozen", "--no-hashes", "--output-file=requirements.txt"]
+        files: ^(pyproject\.toml|uv\.lock)$
+
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0

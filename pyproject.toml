@@ -64,6 +64,7 @@ dev = [
     "isort>=5.0",
     "bandit>=1.7",
     "pre-commit>=3.0",
+    "pre-commit-uv>=4.1.0; python_version>='3.9'",
     "tox>=4.0",
     "tox-uv>=1.26.0; python_version>='3.9'",
 ]
@@ -90,6 +91,7 @@ dev-dependencies = [
     "isort>=5.0",
     "bandit>=1.7",
     "pre-commit>=3.0",
+    "pre-commit-uv>=4.1.0; python_version>='3.9'",
     "tox>=4.0",
     "tox-uv>=1.26.0; python_version>='3.9'",
     "build>=0.10",
