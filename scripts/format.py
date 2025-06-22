@@ -93,10 +93,12 @@ def main() -> int:
             and mypy_exit == 0
             and bandit_exit == 0
         ):
-            print("✅ All code is properly formatted, linted, type-checked, and secure!")
+            print("✅ All code is properly formatted, ")
+            print("linted, type-checked, and secure!")
             return 0
         else:
-            print("❌ Code quality issues found. Run without 'check' to fix formatting.")
+            print("❌ Code quality issues found. ")
+            print("Run without 'check' to fix formatting.")
             return 1
 
     else:
