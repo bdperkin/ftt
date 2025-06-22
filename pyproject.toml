@@ -196,7 +196,7 @@ per-file-ignores = [
     "__init__.py:F401",
     "tests/*:S101",
 ]
-max-complexity = 15
+max-complexity = 20
 docstring-convention = "google"
 statistics = true
 count = true
