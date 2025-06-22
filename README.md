@@ -276,6 +276,64 @@ pre-commit run pytest-check
 
 The hooks automatically format code, catch issues early, and ensure consistent quality across all commits.
 
+### CI/CD Pipeline
+
+FTT includes a comprehensive GitHub Actions CI/CD pipeline:
+
+```yaml
+# Triggers: push to main/develop, pull requests, manual dispatch
+- Test Matrix: Python 3.8-3.13 on Ubuntu
+- Code Quality: formatting, linting, type checking, security
+- Pre-commit: all hooks validation
+- Build: package building and validation
+```
+
+**CI Jobs:**
+
+- **test**: Runs pytest with coverage on all supported Python versions
+- **quality**: Code quality checks (isort, black, flake8, mypy, bandit)
+- **pre-commit**: Validates all pre-commit hooks
+- **build**: Builds and validates the package
+
+**Troubleshooting "pytest not found" errors:**
+
+If you encounter `Executable 'pytest' not found` errors:
+
+```bash
+# Install dev dependencies (includes pytest)
+pip install -e ".[dev]"
+
+# Or install pytest directly
+pip install pytest pytest-cov
+
+# Verify installation
+which pytest
+pytest --version
+
+# For pre-commit hooks
+pip install pre-commit
+pre-commit install
+
+# Use the pytest checker script for diagnosis
+python scripts/check_pytest.py
+```
+
+**Pytest Checker Utility:**
+
+Use the included `scripts/check_pytest.py` script to diagnose pytest installation issues:
+
+```bash
+python scripts/check_pytest.py
+```
+
+This script checks:
+- Python environment and virtual environment status
+- Pytest module importability and executable availability
+- All development dependencies installation status
+- Provides specific troubleshooting suggestions
+
+The CI pipeline automatically installs all dependencies and runs tests with proper coverage reporting.
+
 ## License
 
 MIT License - see LICENSE file for details.

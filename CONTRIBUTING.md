@@ -57,6 +57,26 @@ pip install -e .
 pip install pytest pytest-cov black flake8 mypy isort bandit pre-commit
 ```
 
+**Troubleshooting Installation Issues:**
+
+If you encounter `Executable 'pytest' not found` or similar errors:
+
+```bash
+# Ensure you're in the virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Verify pytest installation
+which pytest
+pytest --version
+
+# If pytest is missing, reinstall dev dependencies
+pip install -e ".[dev]"
+
+# For pre-commit issues
+pip install pre-commit
+pre-commit install --install-hooks
+```
+
 ### 3. Set Up Pre-commit Hooks
 
 ```bash
