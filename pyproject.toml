@@ -31,7 +31,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "User", email = "user@example.com"}
+    {name = "Brandon Perkins", email = "bdperkin@gmail.com"}
 ]
 keywords = ["file", "type", "classification", "magic", "detection"]
 classifiers = [
@@ -64,9 +64,9 @@ dev = [
 ftt = "ftt.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/user/ftt"
-Repository = "https://github.com/user/ftt"
-Issues = "https://github.com/user/ftt/issues"
+Homepage = "https://github.com/bdperkin/ftt"
+Repository = "https://github.com/bdperkin/ftt"
+Issues = "https://github.com/bdperkin/ftt/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

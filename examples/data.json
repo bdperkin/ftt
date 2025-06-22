@@ -2,7 +2,7 @@
     "name": "ftt",
     "version": "1.0.0",
     "description": "File Type Tester - A modern Python tool for classifying files",
-    "author": "User",
+    "author": "Brandon Perkins",
     "license": "MIT",
     "keywords": ["file", "type", "classification", "magic", "detection"],
     "dependencies": {},
